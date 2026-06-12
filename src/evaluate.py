@@ -51,7 +51,7 @@ def evaluate_models():
         print(classification_report(y_test_enc, y_pred_enc,
                                     target_names=le.classes_))
 
-    # ← OUTSIDE the loop (no indentation under for)
+
     print(f"\n{'='*50}")
     print("  MODEL COMPARISON SUMMARY")
     print(f"{'='*50}")
