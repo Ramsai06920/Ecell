@@ -3,7 +3,7 @@ import sys
 from matplotlib.pylab import sample
 import pandas as pd 
 import os
-import re #for cleaning the text
+import re 
 from datasets import load_dataset
 
 HIGH_RISK_WORDS = {
@@ -14,28 +14,15 @@ LOW_RISK_WORDS = {
     'growth','profit','revenue','expansion','strong','increase','improvement', 'gain', 'successful', 'record'
 }
 
-# def clean_text(text):
-#     text = str(text)
-#     text = text.lower()
-#     text = re.sub(r'http\S+|www\S+', '', text)
-#     #text = re.sub(r'<.*?>', '', text)
-#     text = re.sub(r'[^a-z\s]', '', text)
-#     text = re.sub(r'\s+', ' ', text).strip()
-#     return text
+
 
 def clean_text(text):
     text = str(text)
     text = text.lower()
     text = text.replace('\n', ' ')
-    text = text.replace('\t', ' ')
-    text = text.replace('\r', ' ')
-    # Remove URLs
     text = re.sub(r'http\S+|www\S+', '', text)
-    # Remove HTML tags
     text = re.sub(r'<.*?>', '', text)
-    # Keep only lowercase letters and spaces
-    text = re.sub(r'[^a-z ]', '', text)   # changed \s to literal space
-    # Remove extra spaces
+    text = re.sub(r'[^a-z ]', '', text)
     text = ' '.join(text.split())
     return text
 
