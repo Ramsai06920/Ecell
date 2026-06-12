@@ -11,17 +11,17 @@ from src.features import get_features
 
 
 def train_models():
-    # Load features from features.py
+
     X_train, X_test, y_train, y_test = get_features()
 
-    # Convert string labels to numbers
+   
     le = LabelEncoder()
     y_train_enc = le.fit_transform(y_train)
     y_test_enc = le.transform(y_test)
 
     print(f"\nLabel encoding: {dict(zip(le.classes_, le.transform(le.classes_)))}")
 
-    # Train XGBoost    print("\nTraining XGBoost...")
+   
     xgb_model = XGBClassifier(
         n_estimators=100,
         max_depth=6,
@@ -33,7 +33,7 @@ def train_models():
     xgb_model.fit(X_train, y_train_enc)
     print("XGBoost training complete.")
 
-    # Train CatBoost
+    
     print("\nTraining CatBoost...")
     cat_model = CatBoostClassifier(
         iterations=100,
@@ -45,7 +45,7 @@ def train_models():
     cat_model.fit(X_train, y_train_enc)
     print("CatBoost training complete.")
 
-    # Train AdaBoost
+    
     print("\nTraining AdaBoost...")
     ada_model = AdaBoostClassifier(
         n_estimators=100,
@@ -55,7 +55,7 @@ def train_models():
     ada_model.fit(X_train, y_train_enc)
     print("AdaBoost training complete.")
 
-    # Save models and label encoder 
+    
     os.makedirs('models', exist_ok=True)
     joblib.dump(xgb_model, 'models/xgb_model.pkl')
     joblib.dump(cat_model, 'models/cat_model.pkl')
